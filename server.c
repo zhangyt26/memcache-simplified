@@ -145,6 +145,7 @@ int main(int argc, char **argv) {
 	struct sockaddr_in servaddr;
 	int err;
 
+	map_init();
 
 	// map_set("key1", "value");
 	// map_set("key2", "value");

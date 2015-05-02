@@ -2,3 +2,7 @@ import bmemcached
 client = bmemcached.Client(('127.0.0.1:11211'))
 client.set('key', 'value')
 print client.get('key')
+client.set('key2', 'value2')
+print client.get('key2')
+client.set('key2', 'value3')
+print client.get('key2')
