@@ -31,7 +31,7 @@ void *client_thread(void *arg) {
 
 	memcpy(&conn_socket, arg, sizeof(int));
 	// conn_socket = * ((int *) arg);
-	// pthread_detach(pthread_self());
+	pthread_detach(pthread_self());
 
 	for ( ; ; ) {
 		struct packet *recv_packet = malloc(HEADER_LENGTH);
@@ -39,6 +39,7 @@ void *client_thread(void *arg) {
 		err = read(conn_socket, (void *)recv_packet, HEADER_LENGTH);
 		if (err == 0) {
 			printf("TCP FIN! Close and return thread\n");
+			free(recv_packet);
 			close(conn_socket);
 			return NULL;
 		}
@@ -176,7 +177,7 @@ int main(int argc, char **argv) {
 	if (err < 0) {
 		printf("error binding socket!\n");
 	}
-
+	printf("server is running at port 11211\n");
 	err = listen(listen_socket, 5);
 
 	for ( ; ; ) {
