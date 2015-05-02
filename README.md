@@ -1,6 +1,6 @@
 # memcached
 
-A simple memcached implementaion with support of getter/setter
+A simple memcached implementaion as defined by [Memcached Protocol](https://code.google.com/p/memcached/wiki/MemcacheBinaryProtocol) with support of getter/setter.
 
 
 ## Prerequisite
