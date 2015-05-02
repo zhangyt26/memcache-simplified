@@ -28,3 +28,7 @@ Map is implemented by using linked list. It is a bad choice since the lookup of 
 
 3. Locking:
 Every entry in the map has a lock. Implemented using linux pthread rwlock.
+
+## Things to improve
+1. Map implementation
+2. Robustness

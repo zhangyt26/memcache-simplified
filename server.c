@@ -43,6 +43,7 @@ void *client_thread(void *arg) {
 			return NULL;
 		}
 
+		// getter
 		if (recv_packet->opcode == 0) {
 			int key_length = recv_packet->key_length[1] | recv_packet->key_length[0] << 8;
 			char *recv_key;
@@ -100,6 +101,7 @@ void *client_thread(void *arg) {
 			free(recv_key);
 
 		}
+		// setter
 		else if (recv_packet->opcode == 1) {
 
 			struct packet send_packet;
@@ -145,6 +147,7 @@ int main(int argc, char **argv) {
 	struct sockaddr_in servaddr;
 	int err;
 
+	// init the map data structure
 	map_init();
 
 	// map_set("key1", "value");
@@ -168,6 +171,7 @@ int main(int argc, char **argv) {
 	servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
 	servaddr.sin_port = htons(DEFAULT_PORT);
 
+	// bind socket to all the interfaces.
 	err = bind(listen_socket, (struct sockaddr *) &servaddr, sizeof(servaddr));
 	if (err < 0) {
 		printf("error binding socket!\n");
@@ -182,7 +186,7 @@ int main(int argc, char **argv) {
 		printf("waiting for connection\n");
 		conn_socket = accept(listen_socket, (struct sockaddr *) &cliaddr, &clilen);
 		printf("accept socket conn\n");
-
+		// once we accepted the connection, create a thread to handle the response.
 		err = pthread_create(&thread_id, NULL, &client_thread, &conn_socket);
 		if (err < 0) {
 			printf("error creating thread\n");
