@@ -19,6 +19,11 @@ make
 Server will be running on 11211 port.
 
 test-client/test.python is a simple client for verification.
+To run the test client, make sure you have python installed:
+``` bash
+pip install python-binary-memcached
+python test-client/test.python
+```
 
 ## Design decisions
 1. Multi-threading:
